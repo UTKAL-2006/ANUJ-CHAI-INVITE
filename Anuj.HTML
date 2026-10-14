@@ -1,0 +1,442 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anuj, Chai Peene Chalega? ☕</title>
+
+<style>
+:root {
+  --tea: #7b3f20;
+  --cream: #fff4df;
+  --green: #3f6b45;
+  --ink: #3d2418;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, Arial, sans-serif;
+  color: var(--ink);
+  background: linear-gradient(135deg, #fff0d5, #f7d5a6, #ffe9c6);
+  overflow-x: hidden;
+}
+
+.wrap {
+  width: min(960px, 100%);
+  margin: auto;
+  padding: 22px 16px 45px;
+}
+
+.card {
+  background: rgba(255,250,239,.94);
+  border: 2px solid rgba(123,63,32,.12);
+  border-radius: 28px;
+  padding: 30px 22px;
+  margin: 20px 0;
+  text-align: center;
+  box-shadow: 0 12px 32px #7b3f201a;
+}
+
+.hero {
+  background: linear-gradient(145deg, #fff5e3, #ffe0b0);
+}
+
+.stamp {
+  display: inline-block;
+  background: var(--green);
+  color: white;
+  padding: 8px 15px;
+  border-radius: 99px;
+  margin-bottom: 16px;
+}
+
+h1 {
+  font-size: clamp(2.4rem, 8vw, 5rem);
+  line-height: 1.02;
+  color: var(--tea);
+  margin: 12px 0 18px;
+}
+
+h2 {
+  font-size: clamp(1.6rem, 5vw, 2.5rem);
+  color: var(--tea);
+  margin-bottom: 14px;
+}
+
+p {
+  font-size: 1.06rem;
+  line-height: 1.75;
+  margin: 9px auto;
+  max-width: 720px;
+}
+
+.big-emoji {
+  font-size: 4rem;
+  display: block;
+  margin: 8px;
+}
+
+button {
+  border: 0;
+  border-radius: 999px;
+  padding: 14px 24px;
+  margin: 9px 5px;
+  font-size: 1rem;
+  font-weight: 800;
+  cursor: pointer;
+  background: var(--green);
+  color: white;
+  box-shadow: 0 6px 16px #3f6b4528;
+  transition: transform .15s;
+}
+
+button:hover {
+  transform: translateY(-2px);
+}
+
+.alt {
+  background: #fffaf0;
+  color: var(--tea);
+  border: 2px solid #d8a36d;
+}
+
+#response {
+  margin: 22px auto 0;
+  padding: 18px;
+  border-radius: 18px;
+  background: #fff0d4;
+  max-width: 650px;
+}
+
+.hidden {
+  display: none;
+}
+
+/* FOOD MENU */
+.menu {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 15px;
+  margin-top: 20px;
+  text-align: left;
+}
+
+.food {
+  background: white;
+  border-radius: 20px;
+  padding: 18px;
+  border: 1px solid #f1d5ad;
+}
+
+.food .emoji {
+  font-size: 2.6rem;
+}
+
+.food h3 {
+  color: var(--tea);
+  margin: 7px 0;
+}
+
+.food p {
+  font-size: .96rem;
+  line-height: 1.55;
+}
+
+.tag {
+  display: inline-block;
+  background: #fff0d4;
+  color: #75401f;
+  border-radius: 99px;
+  padding: 5px 10px;
+  font-size: .78rem;
+  margin-top: 8px;
+}
+
+/* RECIPE ACCORDION */
+.recipe {
+  background: #fffaf0;
+  border-radius: 18px;
+  padding: 16px;
+  margin: 12px auto;
+  max-width: 700px;
+  text-align: left;
+}
+
+.recipe summary {
+  font-weight: 800;
+  color: var(--tea);
+  cursor: pointer;
+  padding: 4px;
+}
+
+.recipe ul {
+  padding: 10px 0 0 22px;
+  line-height: 1.8;
+}
+
+.count {
+  font-size: 1.2rem;
+  color: var(--green);
+  font-weight: 800;
+  margin-top: 12px;
+}
+
+footer {
+  text-align: center;
+  color: #805538;
+  padding: 15px;
+  font-size: .9rem;
+}
+
+.note {
+  font-size: .88rem;
+  color: #86634d;
+}
+
+#teaBtn {
+  position: fixed;
+  bottom: 14px;
+  right: 14px;
+  z-index: 5;
+  background: var(--tea);
+  padding: 12px 16px;
+  font-size: .9rem;
+}
+
+/* FLOATING EMOJIS */
+.float {
+  position: fixed;
+  bottom: -40px;
+  z-index: 4;
+  pointer-events: none;
+  animation: rise 6s linear forwards;
+}
+
+@keyframes rise {
+  to {
+    transform: translateY(-110vh) rotate(15deg);
+    opacity: 0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<button id="teaBtn" onclick="toast()">☕ Chai Mode</button>
+
+<div class="wrap">
+
+  <!-- MAIN INVITATION -->
+  <section class="card hero">
+    <div class="stamp">DOSTI KI CHHOTI SI INVITATION 🤝</div>
+
+    <span class="big-emoji">☕ 🥖</span>
+
+    <h1>Oye Anuj!<br>Chai Peene Chalega? 😎</h1>
+
+    <p>
+      Bhai, zindagi mein problems toh bahut hain…
+      par unka solution ek cutting chai aur
+      garma-garam vada pav ke saath hi milta hai. 😂
+    </p>
+
+    <p>
+      <strong>Tu, main, chai aur Indian snacks.</strong>
+      Bas aur kya chahiye apni dosti mein! ❤️
+    </p>
+
+    <button onclick="answerYes()">CHAL BHAI! ☕🔥</button>
+    <button class="alt" onclick="answerMaybe()">Kab? 🤔</button>
+
+    <div id="response" class="hidden"></div>
+  </section>
+
+  <!-- FOOD MENU -->
+  <section class="card">
+    <h2>Apna Chai-Nashta Menu 🍽️</h2>
+    <p>Choose kar bhai, aaj kya khaana hai!</p>
+
+    <div class="menu">
+
+      <div class="food">
+        <div class="emoji">☕</div>
+        <h3>Cutting Chai</h3>
+        <p>Adrak wali kadak chai. Har sip ke saath gossip double.</p>
+        <span class="tag">Classic combo</span>
+      </div>
+
+      <div class="food">
+        <div class="emoji">🥖</div>
+        <h3>Vada Pav</h3>
+        <p>Mumbai ka king: spicy batata vada, pav, chutney aur mirchi.</p>
+        <span class="tag">Street-food legend</span>
+      </div>
+
+      <div class="food">
+        <div class="emoji">🥟</div>
+        <h3>Samosa</h3>
+        <p>Crispy outside, aloo masala inside. Chai ka pakka partner.</p>
+        <span class="tag">Crunchy mood</span>
+      </div>
+
+      <div class="food">
+        <div class="emoji">🧅</div>
+        <h3>Pyaz Pakode</h3>
+        <p>Rain ho ya na ho, pakode ka mood kabhi galat nahi hota.</p>
+        <span class="tag">Monsoon vibes</span>
+      </div>
+
+      <div class="food">
+        <div class="emoji">🍞</div>
+        <h3>Bun Maska</h3>
+        <p>Soft bun, butter aur garam chai. Simple cheez, next-level sukoon.</p>
+        <span class="tag">Irani café feels</span>
+      </div>
+
+      <div class="food">
+        <div class="emoji">🌶️</div>
+        <h3>Mirchi Bhaji</h3>
+        <p>Thoda spicy, thoda risky — bilkul tere jokes ki tarah, Anuj. 😂</p>
+        <span class="tag">Dare accepted?</span>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- QUICK RECIPES -->
+  <section class="card">
+    <h2>Ghar Pe Banaane Ki Quick Recipes 👨‍🍳</h2>
+    <p>Agar bahar nahi jaana toh bhai, kitchen mein jugaad kar lenge!</p>
+
+    <details class="recipe">
+      <summary>☕ Adrak wali chai — 2 cups</summary>
+      <ul>
+        <li>1 cup water + 1 cup milk</li>
+        <li>2 tsp tea leaves, sugar as you like</li>
+        <li>Crushed ginger; optional cardamom</li>
+        <li>Water, ginger and tea ko 2–3 min boil karo.
+        Milk aur sugar add karke simmer karo, phir strain kar lo.</li>
+      </ul>
+    </details>
+
+    <details class="recipe">
+      <summary>🥔 Easy vada pav filling</summary>
+      <ul>
+        <li>2 boiled potatoes, mashed</li>
+        <li>Garlic, green chilli, mustard seeds, turmeric and salt</li>
+        <li>Oil mein mustard, garlic and chilli sauté karo.
+        Turmeric aur potato add karke mix karo.</li>
+        <li>Potato balls ko besan batter mein dip karke fry karo;
+        pav, chutney and fried green chilli ke saath serve karo.</li>
+      </ul>
+    </details>
+
+    <details class="recipe">
+      <summary>🥟 Quick aloo samosa filling</summary>
+      <ul>
+        <li>Boiled potato, peas (optional), cumin, chilli, coriander and salt</li>
+        <li>Masale ko pan mein warm karo, potatoes add karke mix karo.</li>
+        <li>Ready-made samosa patti mein filling bhar ke seal karo
+        and fry/bake according to packet directions.</li>
+      </ul>
+    </details>
+
+    <p class="note">
+      Hot oil use karte waqt careful rehna, masterchef Anuj. 😄
+    </p>
+  </section>
+
+  <!-- DOSTI PLAN -->
+  <section class="card">
+    <span class="big-emoji">🤜🤛</span>
+    <h2>Official Dost-Date Plan</h2>
+
+    <p>☑️ Chai pe full discussion</p>
+    <p>☑️ Vada pav / samosa attack</p>
+    <p>☑️ Life ki bakchodi aur serious talks</p>
+    <p>☑️ Bill split karne pe negotiation 😂</p>
+
+    <p class="count">
+      Friendship level: Kadak chai jaisa strong. 💚
+    </p>
+
+    <button onclick="answerYes()">DONE, CHALTE HAIN! 🚶‍♂️</button>
+  </section>
+
+  <footer>Made with chai, snacks & brotherhood ❤️ | For Anuj</footer>
+
+</div>
+
+<script>
+function answerYes() {
+  const box = document.getElementById("response");
+
+  box.classList.remove("hidden");
+
+  box.innerHTML = `
+    <h2>Bas phir pakka, Anuj! ☕🔥</h2>
+    <p>
+      Ab date aur time bata de bhai.
+      Chai meri taraf se… vada pav dekh lenge. 😂🤝
+    </p>
+  `;
+
+  burst();
+}
+
+function answerMaybe() {
+  const box = document.getElementById("response");
+
+  box.classList.remove("hidden");
+
+  box.innerHTML = `
+    <h2>Arre bhai, “kab” kya hota hai? 😂</h2>
+    <p>
+      Aaj ya kal — ek cutting chai toh banti hai!
+      Tu time bol, main ready. ☕
+    </p>
+  `;
+}
+
+function toast() {
+  const button = document.getElementById("teaBtn");
+
+  button.textContent = "☕ Kadak chai, kadak dosti!";
+
+  setTimeout(() => {
+    button.textContent = "☕ Chai Mode";
+  }, 2200);
+
+  burst();
+}
+
+function burst() {
+  const emojis = ["☕", "🥖", "❤️", "🥟", "🤝"];
+
+  for (let i = 0; i < 14; i++) {
+    const emoji = document.createElement("span");
+
+    emoji.className = "float";
+    emoji.textContent =
+      emojis[Math.floor(Math.random() * emojis.length)];
+
+    emoji.style.left = Math.random() * 100 + "vw";
+    emoji.style.fontSize = (20 + Math.random() * 18) + "px";
+    emoji.style.animationDuration = (4 + Math.random() * 3) + "s";
+
+    document.body.appendChild(emoji);
+
+    setTimeout(() => emoji.remove(), 7500);
+  }
+}
+</script>
+
+</body>
+</html>
